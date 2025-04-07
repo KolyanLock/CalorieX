@@ -5,7 +5,6 @@ import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.nikolait.assignment.caloriex.exception.EntityAlreadyExistsException;
-import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.Dish;
 import org.nikolait.assignment.caloriex.model.User;
 import org.nikolait.assignment.caloriex.repository.DishRepository;
@@ -80,7 +79,7 @@ public class DishServiceImpl implements DishService {
 
     private User getUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new UnprocessableEntityException(
+                .orElseThrow(() -> new RuntimeException(
                         "User with id %d not found".formatted(userId)
                 ));
     }

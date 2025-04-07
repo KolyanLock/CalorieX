@@ -13,6 +13,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
 
     List<Meal> findAllByUserId(Long userId);
 
-    List<Meal> findByUserIdAndCreatedAtBetween(Long userId, Instant start, Instant end);
+    List<Meal> findByUserIdAndCreatedAtBetweenOrderByCreatedAt(Long userId, Instant start, Instant end);
 
 }

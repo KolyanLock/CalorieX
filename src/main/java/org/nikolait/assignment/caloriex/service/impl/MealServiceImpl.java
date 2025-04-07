@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
@@ -41,25 +41,17 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<Meal> getUserMealsForToday(Long userId) {
-        LocalDate today = LocalDate.now(ZoneOffset.UTC);
-        Instant start = today.atStartOfDay().toInstant(ZoneOffset.UTC);
-        Instant end = today.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC);
-        return mealRepository.findByUserIdAndCreatedAtBetween(userId, start, end);
+    public List<Meal> getUserMealsForDay(Long userId, LocalDate day, ZoneId zoneId) {
+        Instant start = day.atStartOfDay(zoneId).toInstant();
+        Instant end = day.plusDays(1).atStartOfDay(zoneId).toInstant();
+        return mealRepository.findByUserIdAndCreatedAtBetweenOrderByCreatedAt(userId, start, end);
     }
 
     @Override
-    public List<Meal> getUserMealsForDay(Long userId, LocalDate day) {
-        Instant start = day.atStartOfDay().toInstant(ZoneOffset.UTC);
-        Instant end = day.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC);
-        return mealRepository.findByUserIdAndCreatedAtBetween(userId, start, end);
-    }
-
-    @Override
-    public List<Meal> getUserMealsBetween(Long userId, LocalDate startDay, LocalDate endDay) {
-        Instant start = startDay.atStartOfDay().toInstant(ZoneOffset.UTC);
-        Instant end = endDay.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC);
-        return mealRepository.findByUserIdAndCreatedAtBetween(userId, start, end);
+    public List<Meal> getUserMealsBetween(Long userId, LocalDate startDay, LocalDate endDay, ZoneId zoneId) {
+        Instant start = startDay.atStartOfDay(zoneId).toInstant();
+        Instant end = endDay.plusDays(1).atStartOfDay(zoneId).toInstant();
+        return mealRepository.findByUserIdAndCreatedAtBetweenOrderByCreatedAt(userId, start, end);
     }
 
     @Override
@@ -105,7 +97,7 @@ public class MealServiceImpl implements MealService {
 
     private User getUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new UnprocessableEntityException(
+                .orElseThrow(() -> new RuntimeException(
                         "User with id %d was not found".formatted(userId)
                 ));
     }
