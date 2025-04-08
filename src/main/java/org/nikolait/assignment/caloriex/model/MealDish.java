@@ -15,12 +15,14 @@ import lombok.*;
 public class MealDish {
 
     @EmbeddedId
+    @ToString.Exclude
     @EqualsAndHashCode.Include
     private MealDishId id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("mealId")
     @JoinColumn(name = "meal_id")
+    @ToString.Exclude
     private Meal meal;
 
     @ManyToOne(fetch = FetchType.EAGER)

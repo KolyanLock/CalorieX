@@ -72,10 +72,10 @@ CREATE TABLE dishes
     id            BIGSERIAL PRIMARY KEY,
     user_id       BIGINT       NOT NULL REFERENCES users (id),
     name          VARCHAR(255) NOT NULL,
-    calories      INTEGER      NOT NULL CHECK (calories > 0),
     protein       NUMERIC(6, 2) CHECK (protein >= 0),
     fat           NUMERIC(6, 2) CHECK (fat >= 0),
     carbohydrates NUMERIC(6, 2) CHECK (carbohydrates >= 0),
+    calories      INTEGER      NOT NULL CHECK (calories > 0),
     created_at    TIMESTAMPTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT unique_user_dish_name UNIQUE (user_id, name)
 );

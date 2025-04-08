@@ -5,7 +5,6 @@ import java.util.List;
 
 public record MealResponseDto(
         Long id,
-        Long userId,
         String name,
         List<MealDishResponseDto> mealDishes,
         int calories,

@@ -1,8 +1,7 @@
 package org.nikolait.assignment.caloriex.dto;
 
 public record MealDishResponseDto(
-        Long dishId,
-        String dishName,
+        DishResponseDto dish,
         Double servings,
         Double calories
 ) {

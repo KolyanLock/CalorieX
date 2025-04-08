@@ -18,10 +18,6 @@ public class DishCreationDto {
     @Size(min = 1, max = 255)
     private String name;
 
-    @Min(1)
-    @Max(1000)
-    private Integer calories;
-
     @Min(0)
     @Max(1000)
     @Schema(description = "grams")
@@ -36,5 +32,9 @@ public class DishCreationDto {
     @Max(1000)
     @Schema(description = "grams")
     private Double carbohydrates;
+
+    @Min(1)
+    @Max(1000)
+    private Integer calories;
 
 }

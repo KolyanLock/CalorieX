@@ -9,7 +9,10 @@ import org.nikolait.assignment.caloriex.model.MealDish;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = DishMapper.class
+)
 public interface MealDishMapper {
 
     @Mapping(source = "dishId", target = "dish.id")

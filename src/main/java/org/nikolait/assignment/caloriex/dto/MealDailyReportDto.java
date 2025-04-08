@@ -8,6 +8,6 @@ public record MealDailyReportDto(
         List<MealResponseDto> meals,
         int totalCalories,
         int dailyCalorieTarget,
-        boolean isExceeded
+        boolean exceeded
 ) {
 }
