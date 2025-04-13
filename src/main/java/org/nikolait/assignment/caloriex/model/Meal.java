@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
