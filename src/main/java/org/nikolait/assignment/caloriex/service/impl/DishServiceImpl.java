@@ -40,13 +40,13 @@ public class DishServiceImpl implements DishService {
         if (dish.getId() != null) {
             throw new IllegalArgumentException("Dish id must be null when creating");
         }
+        dish.setUser(getUserById(userId));
         dish.setName((StringUtils.normalizeSpace(dish.getName())));
         if (dishRepository.existsByNameAndUserId(dish.getName(), userId)) {
             throw new EntityAlreadyExistsException(
                     "Dish with name %s already exists for current User".formatted(dish.getName())
             );
         }
-        dish.setUser(getUserById(userId));
         if (dish.getCalories() == null) {
             validateDishComposition(dish);
             int caloriesPerServing = CalorieCalculator.calculateDishCalories(dish);
