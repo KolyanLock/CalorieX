@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.nikolait.assignment.caloriex.UnitTests;
+import org.nikolait.assignment.caloriex.UnitTest;
 import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.*;
 import org.nikolait.assignment.caloriex.repository.DishRepository;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class MealServiceImplTestTest extends UnitTests {
+class MealServiceImplTestTest extends UnitTest {
 
     // Test constants
     private static final Long USER_ID = 1L;

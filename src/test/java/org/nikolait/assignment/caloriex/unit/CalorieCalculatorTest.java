@@ -3,13 +3,13 @@ package org.nikolait.assignment.caloriex.unit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.nikolait.assignment.caloriex.UnitTests;
+import org.nikolait.assignment.caloriex.UnitTest;
 import org.nikolait.assignment.caloriex.model.*;
 import org.nikolait.assignment.caloriex.ulti.CalorieCalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CalorieCalculatorTest extends UnitTests {
+class CalorieCalculatorTest extends UnitTest {
 
     @Test
     void calculateDishCalories_shouldReturnCorrectValue_forTypicalMacros() {

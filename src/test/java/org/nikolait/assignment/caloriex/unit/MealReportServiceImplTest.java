@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.nikolait.assignment.caloriex.UnitTests;
+import org.nikolait.assignment.caloriex.UnitTest;
 import org.nikolait.assignment.caloriex.model.*;
 import org.nikolait.assignment.caloriex.repository.UserRepository;
 import org.nikolait.assignment.caloriex.service.MealService;
@@ -27,7 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-public class MealReportServiceImplTest extends UnitTests {
+public class MealReportServiceImplTest extends UnitTest {
 
     // Test constants
     private static final Long USER_ID = 1L;

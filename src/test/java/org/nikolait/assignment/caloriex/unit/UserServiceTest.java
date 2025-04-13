@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.nikolait.assignment.caloriex.UnitTests;
+import org.nikolait.assignment.caloriex.UnitTest;
 import org.nikolait.assignment.caloriex.exception.EntityAlreadyExistsException;
 import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.ActivityLevel;
@@ -19,6 +19,7 @@ import org.nikolait.assignment.caloriex.repository.ActivityLevelRepository;
 import org.nikolait.assignment.caloriex.repository.GoalRepository;
 import org.nikolait.assignment.caloriex.repository.UserRepository;
 import org.nikolait.assignment.caloriex.service.impl.UserServiceImpl;
+import org.nikolait.assignment.caloriex.ulti.CalorieCalculator;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -28,12 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class UserServiceTest extends UnitTests {
+class UserServiceTest extends UnitTest {
 
     @Mock
     private UserRepository userRepository;
+
     @Mock
     private ActivityLevelRepository activityLevelRepository;
+
     @Mock
     private GoalRepository goalRepository;
 
@@ -72,8 +75,8 @@ class UserServiceTest extends UnitTests {
                 .weight(TEST_WEIGHT)
                 .height(TEST_HEIGHT)
                 .gender(TEST_GENDER)
-                .activityLevel(ActivityLevel.builder().id(1L).build())
-                .goal(Goal.builder().id(1L).build())
+                .activityLevel(defaultActivityLevel)
+                .goal(defaultGoal)
                 .build();
     }
 
@@ -116,26 +119,18 @@ class UserServiceTest extends UnitTests {
 
     @ParameterizedTest
     @EnumSource(GenderEnum.class)
-    void createUser_WhenValidUser_CalculatesCorrectCalorieTargetForGender(GenderEnum gender) {
+    void createUser_WhenValidUser_UsesCalculator(GenderEnum gender) {
+        // Arrange
         mockSuccessfulUserCreationDependencies();
+        User testUser = validUser.toBuilder().gender(gender).build();
 
-        User testUser = validUser.toBuilder()
-                .gender(gender)
-                .build();
+        // Задаем ожидаемое значение через калькулятор
+        int expectedCalories = CalorieCalculator.calculateDailyCalorieTarget(testUser);
 
-        // Harris-Benedict calculation for test data:
-        // Weight: 60 kg, Height: 170 cm, Age: 30
-        // Activity: 1.5, Goal: 1.2
-        int expectedCalories = switch (gender) {
-            case MALE -> (int) Math.round(
-                    (88.36 + (13.4 * 60) + (4.8 * 170) - (5.7 * 30)) * 1.5 * 1.2
-            );  // 2658 calories
-            case FEMALE -> (int) Math.round(
-                    (447.6 + (9.2 * 60) + (3.1 * 170) - (4.3 * 30)) * 1.5 * 1.2
-            );  // 2343 calories
-        };
-
+        // Act
         User result = userService.createUser(testUser);
+
+        // Assert
         assertThat(result.getDailyCalorieTarget()).isEqualTo(expectedCalories);
     }
 
