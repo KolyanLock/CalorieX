@@ -306,4 +306,5 @@ class MealServiceImplTestTest extends UnitTests {
             verify(mealRepository).findByUserIdAndCreatedAtBetweenOrderByCreatedAt(USER_ID, startInstant, endInstant);
         }
     }
+
 }

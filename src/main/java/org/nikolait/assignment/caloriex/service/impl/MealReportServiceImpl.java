@@ -38,7 +38,7 @@ public class MealReportServiceImpl implements MealReportService {
         List<Meal> dailyMeals = mealService.getUserMealsForDay(userId, day, zoneId);
         int totalCalories = dailyMeals.stream().mapToInt(Meal::getCalories).sum();
         int dailyCalorieTarget = user.getDailyCalorieTarget();
-        return new MealDailyReport(day, dailyMeals, totalCalories, dailyCalorieTarget);
+        return new MealDailyReport(day, dailyMeals, dailyCalorieTarget, totalCalories);
     }
 
     @Override
