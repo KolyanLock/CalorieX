@@ -179,4 +179,20 @@
         </resources>
     </build>
 
+    <profiles>
+        <profile>
+            <id>unit</id>
+            <properties>
+                <test>org.nikolait.assignment.caloriex.unit.*Test</test>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>integration</id>
+            <properties>
+                <test>org.nikolait.assignment.caloriex.integration.*Test</test>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
