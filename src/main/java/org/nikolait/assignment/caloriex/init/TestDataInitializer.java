@@ -28,7 +28,7 @@ public class TestDataInitializer implements ApplicationRunner {
                 Long.class
         );
         if (userIdSeqLastValue != null && userIdSeqLastValue == 1) {
-            new ResourceDatabasePopulator(new ClassPathResource("db/sql/init_test_data.sql")).execute(dataSource);
+            new ResourceDatabasePopulator(new ClassPathResource("sql/init_test_data.sql")).execute(dataSource);
         }
     }
 }

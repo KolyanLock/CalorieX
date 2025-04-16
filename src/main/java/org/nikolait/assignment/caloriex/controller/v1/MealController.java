@@ -11,7 +11,6 @@ import org.nikolait.assignment.caloriex.mapper.MealMapper;
 import org.nikolait.assignment.caloriex.model.Meal;
 import org.nikolait.assignment.caloriex.secutiry.AuthorizationService;
 import org.nikolait.assignment.caloriex.service.MealService;
-import org.nikolait.assignment.caloriex.service.UserService;
 import org.nikolait.assignment.caloriex.ulti.UriUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ public class MealController {
     private final AuthorizationService authorizationService;
     private final MealService mealService;
     private final MealMapper mealMapper;
-    private final UserService userService;
 
     @PostMapping
     @Operation(

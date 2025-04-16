@@ -7,5 +7,5 @@ import org.mockito.junit.jupiter.MockitoExtension;
  * Base class for running all unit tests with MockitoExtension
  */
 @ExtendWith(MockitoExtension.class)
-public abstract class UnitTest {
+public abstract class UnitTestBase {
 }

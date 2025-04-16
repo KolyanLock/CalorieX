@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.nikolait.assignment.caloriex.IntegrationTest;
+import org.nikolait.assignment.caloriex.IntegrationTestBase;
 import org.nikolait.assignment.caloriex.exception.EntityAlreadyExistsException;
 import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.ActivityLevel;
@@ -22,7 +22,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class UserServiceTest extends IntegrationTest {
+class UserServiceTest extends IntegrationTestBase {
 
     // Reference data from migrations
     private static final Long SEDENTARY_ACTIVITY_ID = 1L;
@@ -38,12 +38,12 @@ class UserServiceTest extends IntegrationTest {
     private static final double TEST_WEIGHT = 60.0;
     private static final int TEST_HEIGHT = 170;
 
+    @Autowired
+    private UserService userService;
+
     private User testUser;
     private ActivityLevel moderateActivity;
     private Goal muscleGainGoal;
-
-    @Autowired
-    private UserService userService;
 
     @BeforeEach
     void setUp() {

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @Import(TestcontainersConfiguration.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public abstract class IntegrationTest {
+public abstract class IntegrationTestBase {
 
     @Autowired
     protected ActivityLevelRepository activityLevelRepository;

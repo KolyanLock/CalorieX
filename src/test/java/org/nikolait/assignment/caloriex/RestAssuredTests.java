@@ -21,8 +21,8 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.*;
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
-@Sql(scripts = "/db/sql/init_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
-@Sql(scripts = "/db/sql/clear_test_data.sql", executionPhase = AFTER_TEST_METHOD)
+@Sql(scripts = "/sql/init_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
+@Sql(scripts = "/sql/clear_user_data.sql", executionPhase = AFTER_TEST_METHOD)
 public class RestAssuredTests {
 
     @Autowired

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.nikolait.assignment.caloriex.UnitTest;
+import org.nikolait.assignment.caloriex.UnitTestBase;
 import org.nikolait.assignment.caloriex.exception.EntityAlreadyExistsException;
 import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.ActivityLevel;
@@ -29,7 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class UserServiceTest extends UnitTest {
+class UserServiceImplTest extends UnitTestBase {
+
+    private static final String TEST_EMAIL = "testuser@example.com";
+    private static final String TEST_NAME = "Test User";
+    private static final int TEST_AGE = 30;
+    private static final double TEST_WEIGHT = 60.0;  // Updated weight
+    private static final int TEST_HEIGHT = 170;      // Updated height
+    private static final GenderEnum TEST_GENDER = GenderEnum.MALE;
 
     @Mock
     private UserRepository userRepository;
@@ -42,13 +49,6 @@ class UserServiceTest extends UnitTest {
 
     @InjectMocks
     private UserServiceImpl userService;
-
-    private static final String TEST_EMAIL = "testuser@example.com";
-    private static final String TEST_NAME = "Test User";
-    private static final int TEST_AGE = 30;
-    private static final double TEST_WEIGHT = 60.0;  // Updated weight
-    private static final int TEST_HEIGHT = 170;      // Updated height
-    private static final GenderEnum TEST_GENDER = GenderEnum.MALE;
 
     private ActivityLevel defaultActivityLevel;
     private Goal defaultGoal;

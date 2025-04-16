@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.nikolait.assignment.caloriex.UnitTest;
+import org.nikolait.assignment.caloriex.UnitTestBase;
 import org.nikolait.assignment.caloriex.exception.EntityAlreadyExistsException;
 import org.nikolait.assignment.caloriex.model.Dish;
 import org.nikolait.assignment.caloriex.model.User;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-class DishServiceImplTest extends UnitTest {
+class DishServiceImplTest extends UnitTestBase {
 
     private static final Long USER_ID = 1L;
     private static final Long DISH_ID = 1L;
