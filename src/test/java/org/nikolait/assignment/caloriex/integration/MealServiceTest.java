@@ -26,6 +26,9 @@ class MealServiceTest extends IntegrationTestBase {
     // Constants for reference data and defaults
     private static final Long SEDENTARY_ACTIVITY_ID = 1L;
     private static final Long WEIGHT_LOSS_GOAL_ID = 1L;
+    private static final int TEST_AGE = 30;
+    private static final double TEST_WEIGHT = 80.0;
+    private static final int TEST_HEIGHT = 170;
     private static final ZoneId TEST_ZONE = ZoneId.of("America/New_York");
     private static final double DEFAULT_SERVINGS = 1.0;
 
@@ -158,10 +161,10 @@ class MealServiceTest extends IntegrationTestBase {
         Instant outOfRange = today.plusDays(1).atStartOfDay(TEST_ZONE).plusSeconds(1).toInstant();
 
         // Create meals before, within, and after the day
-        Meal beforeMeal = createMealWithSpecificTime(testUser, startOfDay.minusSeconds(1), List.of(userDish));
-        Meal validMeal1 = createMealWithSpecificTime(testUser, startOfDay, List.of(userDish));
-        Meal validMeal2 = createMealWithSpecificTime(testUser, endOfDay, List.of(userDish));
-        Meal afterMeal = createMealWithSpecificTime(testUser, outOfRange, List.of(userDish));
+        Meal beforeMeal = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), startOfDay.minusSeconds(1));
+        Meal validMeal1 = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), startOfDay);
+        Meal validMeal2 = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), endOfDay);
+        Meal afterMeal = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), outOfRange);
 
         // Act
         List<Meal> dayMeals = mealService.getUserMealsForDay(
@@ -184,10 +187,10 @@ class MealServiceTest extends IntegrationTestBase {
         Instant justAfterEnd = referenceDate.plusDays(1).atStartOfDay(TEST_ZONE).plusSeconds(1).toInstant();
 
         // Create meals around the day boundaries
-        Meal mealBefore = createMealWithSpecificTime(testUser, startOfDay.minusSeconds(1), List.of(userDish));
-        Meal mealAtStart = createMealWithSpecificTime(testUser, startOfDay, List.of(userDish));
-        Meal mealBeforeEnd = createMealWithSpecificTime(testUser, justBeforeEnd, List.of(userDish));
-        Meal mealAfter = createMealWithSpecificTime(testUser, justAfterEnd, List.of(userDish));
+        Meal mealBefore = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), startOfDay.minusSeconds(1));
+        Meal mealAtStart = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), startOfDay);
+        Meal mealBeforeEnd = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), justBeforeEnd);
+        Meal mealAfter = createMealWithSpecificTime(testUser, List.of(buildMealDish(userDish, DEFAULT_SERVINGS)), justAfterEnd);
 
         // Act: retrieve meals only for the reference date
         List<Meal> filtered = mealService.getUserMealsBetween(
@@ -209,9 +212,9 @@ class MealServiceTest extends IntegrationTestBase {
         User user = User.builder()
                 .name(name)
                 .email(email)
-                .age(30)
-                .weight(70.5)
-                .height(175)
+                .age(TEST_AGE)
+                .weight(TEST_WEIGHT)
+                .height(TEST_HEIGHT)
                 .gender(GenderEnum.MALE)
                 .activityLevel(sedentaryActivityLevel)
                 .goal(weightLossGoal)
@@ -236,6 +239,7 @@ class MealServiceTest extends IntegrationTestBase {
      */
     private MealDish buildMealDish(Dish dish, double servings) {
         MealDish mealDish = new MealDish();
+        mealDish.setId(new MealDishId());
         mealDish.setDish(dish);
         mealDish.setServings(servings);
         return mealDish;
@@ -253,26 +257,16 @@ class MealServiceTest extends IntegrationTestBase {
     /**
      * Creates and persists a meal at a specific instant with given dishes.
      */
-    private Meal createMealWithSpecificTime(User owner, Instant instant, List<Dish> dishes) {
-        // Create meal entity with custom creation timestamp
+    private Meal createMealWithSpecificTime(User owner, List<MealDish> mealDishes, Instant createdAt) {
         Meal meal = Meal.builder()
                 .user(owner)
-                .createdAt(instant)
+                .createdAt(createdAt)
                 .build();
         mealRepository.save(meal);
 
-        // Build and attach MealDish instances
-        List<MealDish> mealDishes = dishes.stream()
-                .map(d -> {
-                    MealDish md = buildMealDish(d, DEFAULT_SERVINGS);
-                    md.setId(new MealDishId());
-                    md.setMeal(meal);
-                    return md;
-                })
-                .toList();
+        mealDishes.forEach(md -> md.setMeal(meal));
         meal.setMealDishes(mealDishes);
 
-        // Persist the complete meal with dishes
         return mealRepository.save(meal);
     }
 }
