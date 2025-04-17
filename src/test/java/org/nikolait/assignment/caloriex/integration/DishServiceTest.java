@@ -45,18 +45,6 @@ class DishServiceTest extends IntegrationTestBase {
     @Autowired
     private DishService dishService;
 
-    @Autowired
-    private DishRepository dishRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ActivityLevelRepository activityLevelRepository;
-
-    @Autowired
-    private GoalRepository goalRepository;
-
     private ActivityLevel sedentaryActivityLevel;
     private Goal weighLossGoal;
 

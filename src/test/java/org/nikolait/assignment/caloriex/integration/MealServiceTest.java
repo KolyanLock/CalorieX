@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.nikolait.assignment.caloriex.IntegrationTestBase;
 import org.nikolait.assignment.caloriex.exception.UnprocessableEntityException;
 import org.nikolait.assignment.caloriex.model.*;
-import org.nikolait.assignment.caloriex.repository.*;
 import org.nikolait.assignment.caloriex.service.MealService;
 import org.nikolait.assignment.caloriex.ulti.CalorieCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +33,6 @@ class MealServiceTest extends IntegrationTestBase {
 
     @Autowired
     private MealService mealService;
-
-    @Autowired
-    private MealRepository mealRepository;
-
-    @Autowired
-    private DishRepository dishRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ActivityLevelRepository activityLevelRepository;
-
-    @Autowired
-    private GoalRepository goalRepository;
 
     // Test fixtures
     private ActivityLevel sedentaryActivityLevel;

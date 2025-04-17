@@ -23,7 +23,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.*;
 @TestInstance(Lifecycle.PER_CLASS)
 @Sql(scripts = "/sql/init_test_data.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "/sql/clear_user_data.sql", executionPhase = AFTER_TEST_METHOD)
-public class RestAssuredTests {
+public abstract class RestAssuredTestBase {
 
     @Autowired
     private UserRepository userRepository;
@@ -42,10 +42,6 @@ public class RestAssuredTests {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    }
-
-    @Test
-    void contextLoads() {
         assertEquals(3, userRepository.findAll().size());
         assertEquals(9, dishRepository.findAll().size());
         assertEquals(24, mealRepository.findAll().size());
