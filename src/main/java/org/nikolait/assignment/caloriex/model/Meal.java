@@ -38,7 +38,7 @@ public class Meal {
     private List<MealDish> mealDishes = new ArrayList<>();
 
     @Builder.Default
-    @CreationTimestamp
+//    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 

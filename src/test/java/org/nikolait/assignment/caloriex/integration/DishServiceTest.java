@@ -57,15 +57,16 @@ class DishServiceTest extends IntegrationTestBase {
     @Autowired
     private GoalRepository goalRepository;
 
+    private ActivityLevel sedentaryActivityLevel;
+    private Goal weighLossGoal;
+
     private User testUser;
-    private ActivityLevel defaultActivityLevel;
-    private Goal defaultGoal;
 
     @BeforeEach
     void setUp() {
-        defaultActivityLevel = activityLevelRepository.findById(SEDENTARY_ACTIVITY_ID)
+        sedentaryActivityLevel = activityLevelRepository.findById(SEDENTARY_ACTIVITY_ID)
                 .orElseThrow(() -> new IllegalStateException("SEDENTARY activity level not found"));
-        defaultGoal = goalRepository.findById(WEIGHT_LOSS_GOAL_ID)
+        weighLossGoal = goalRepository.findById(WEIGHT_LOSS_GOAL_ID)
                 .orElseThrow(() -> new IllegalStateException("WEIGHT_LOSS goal not found"));
         testUser = createTestUser(TEST_USER_NAME, TEST_USER_EMAIL);
     }
@@ -149,8 +150,8 @@ class DishServiceTest extends IntegrationTestBase {
                 .weight(70.5)
                 .height(175)
                 .gender(GenderEnum.MALE)
-                .activityLevel(defaultActivityLevel)
-                .goal(defaultGoal)
+                .activityLevel(sedentaryActivityLevel)
+                .goal(weighLossGoal)
                 .build();
         user.setDailyCalorieTarget(CalorieCalculator.calculateDailyCalorieTarget(user));
         return userRepository.save(user);
