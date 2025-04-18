@@ -65,17 +65,31 @@ You can choose **one** of the following:
    ```
 
 3. Run with Maven:
-   ```bash
-   mvn spring-boot:run -Dspring-boot.run.profiles=dev
-   ```
+    - **Standard launch**
+      ```bash
+      mvn spring-boot:run
+      ```  
 
-   The `dev` profile will preload the database with test data.
+    - **Launch with `dev` profile** (preloads test dataset)
+      ```bash
+      mvn spring-boot:run -Dspring-boot.run.profiles=dev
+      ```  
 
 4. Alternatively, build and run the JAR:
-   ```bash
-   mvn clean package
-   java -jar target/CalorieX-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev
-   ```
+    - **Build the JAR**
+      ```bash  
+      mvn clean package  
+      ```  
+
+    - **Run (default profile)**
+      ```bash  
+      java -jar target/CalorieX-0.0.1-SNAPSHOT.jar  
+      ```  
+
+    - **Run with `dev` profile** (preloads test dataset)
+      ```bash  
+      java -jar target/CalorieX-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev  
+      ```  
 
 ---
 
