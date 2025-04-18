@@ -15,15 +15,22 @@ CalorieX is a Spring Boot RESTful API for calorie tracking.
 ## ⚙ Requirements
 
 ### For Docker Compose
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
 
-> ✅ Java and Maven are **not required** when running via Docker Compose.
+You can choose **one** of the following:
+
+- **[Docker Desktop](https://www.docker.com)**  
+  Recommended for most platforms. It includes both Docker Engine and Docker Compose.
+
+
+- **[Docker Engine](https://docs.docker.com/engine/install/) + [Docker Compose](https://docs.docker.com/compose/)**  
+  Install separately, typically on Linux servers.
+
+> ✅ Java, Maven, and PostgreSQL are **not required** when running via Docker Compose.
 
 ### For Local Development (without Docker)
 - Java 21
 - Maven 3.9+
-- PostgreSQL installed locally
+- PostgreSQL installed locally or in Docker
 
 ---
 
