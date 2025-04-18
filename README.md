@@ -57,7 +57,7 @@ You can choose **one** of the following:
 
 1. Set up PostgreSQL locally and create a `caloriex_db` database.
 
-2. Create `secret/secret.properties (replace port `5432` if your PostgreSQL uses a different one)`:
+2. Create `src/main/resources/secret/secret.properties (replace port `5432` if your PostgreSQL uses a different one)`:
    ```properties
    DB_URL=localhost:5432/caloriex_db
    DB_USER=your_user
@@ -94,8 +94,8 @@ You can choose **one** of the following:
 ---
 
 ## ✍ Notes
-- The `application.properties` imports `secret/secret.properties` for DB config.
-- Database is not initialized automatically unless you use the `dev` profile.
+- The application architecture is simplified for demonstration purposes.
+- Additional features like improved and expanded business logic and Spring Security (e.g. JWT-based authorization) can be added if needed.
 
 ---
 
